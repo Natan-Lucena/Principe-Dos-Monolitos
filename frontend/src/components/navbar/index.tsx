@@ -12,7 +12,7 @@ export default function Navbar({ isAlreadyLoggedIn }: NavbarProps) {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         <div className="flex items-center space-x-3">
           <Image src={logo} alt="Logo Capítulo" width={50} height={50} />
-          <span className="font-bold text-lg text-black drop-shadow-md">
+          <span className="font-bold text-lg text-yellow-500 drop-shadow-md">
             Capítulo Príncipe dos Monólitos nº 879
           </span>
         </div>
