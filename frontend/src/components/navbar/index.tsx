@@ -8,7 +8,7 @@ interface NavbarProps {
 
 export default function Navbar({ isAlreadyLoggedIn }: NavbarProps) {
   return (
-    <nav className="w-full fixed top-0 left-0 z-50 bg-transparent">
+    <nav className="w-full fixed top-0 left-0 z-50 bg-white/90 shadow-md backdrop-blur-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         <div className="flex items-center space-x-3">
           <Image src={logo} alt="Logo Capítulo" width={50} height={50} />

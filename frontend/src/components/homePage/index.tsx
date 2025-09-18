@@ -7,6 +7,7 @@ import instalacaoEnzo from "../../assets/instalacao-enzo.jpg";
 
 import Navbar from "../navbar";
 import Carousel from "../carrosel";
+import Footer from "../footer";
 
 export default function HomePage() {
   return (
@@ -56,7 +57,28 @@ export default function HomePage() {
             images={[instalacaoNatan.src, eleicaoNatan.src, instalacaoEnzo.src]}
             speed={40}
           />
+          <div className="mt-12 px-6 md:px-20 text-white bg-black/50 p-6 rounded-2xl shadow-lg">
+            <p className="leading-relaxed text-justify">
+              Atualmente, o Capítulo DeMolay{" "}
+              <strong>Príncipe dos Monólitos n.º 879</strong> conta com 12
+              membros ativos, alguns deles integrando a Cavalaria do Priorado da
+              Quinta Região e o Gabinete Estadual. O Capítulo se destaca por
+              participar ativamente no desenvolvimento de lideranças, oferecendo
+              aos jovens oportunidades de crescimento pessoal, responsabilidade
+              e atuação comunitária.
+            </p>
+            <p className="mt-4 leading-relaxed text-justify">
+              Mais do que uma organização juvenil, o Príncipe dos Monólitos é um
+              espaço onde os membros aprendem a trabalhar em equipe, tomar
+              decisões e exercer influência positiva, preparando-se para assumir
+              papéis de destaque dentro da Ordem DeMolay e na sociedade. A
+              participação em projetos, eventos e na gestão do próprio Capítulo
+              reforça a formação de jovens conscientes, éticos e comprometidos
+              com o bem comum.
+            </p>
+          </div>
         </div>
+        <Footer />
       </div>
     </div>
   );
