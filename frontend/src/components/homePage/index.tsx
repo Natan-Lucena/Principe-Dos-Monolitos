@@ -1,11 +1,16 @@
 import Image from "next/image";
 import backgroundImage from "../../assets/background.png";
 import fotoMembros from "../../assets/foto-membros.jpg";
+import instalacaoNatan from "../../assets/instalacao-natan.jpg";
+import eleicaoNatan from "../../assets/eleicao-natan.png";
+import instalacaoEnzo from "../../assets/instalacao-enzo.jpg";
+
 import Navbar from "../navbar";
+import Carousel from "../carrosel";
 
 export default function HomePage() {
   return (
-    <div className="relative w-screen h-screen">
+    <div className="relative w-screen min-h-screen">
       <Image
         src={backgroundImage}
         alt="Background"
@@ -44,6 +49,13 @@ export default function HomePage() {
               refletindo orgulho e identidade local.
             </p>
           </div>
+        </div>
+
+        <div className="mt-16 px-6 md:px-20">
+          <Carousel
+            images={[instalacaoNatan.src, eleicaoNatan.src, instalacaoEnzo.src]}
+            speed={40}
+          />
         </div>
       </div>
     </div>
