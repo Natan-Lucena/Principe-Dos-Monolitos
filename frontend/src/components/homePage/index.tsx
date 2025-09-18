@@ -4,6 +4,8 @@ import fotoMembros from "../../assets/foto-membros.jpg";
 import instalacaoNatan from "../../assets/instalacao-natan.jpg";
 import eleicaoNatan from "../../assets/eleicao-natan.png";
 import instalacaoEnzo from "../../assets/instalacao-enzo.jpg";
+import anoDemolay from "../../assets/ano-demolay.jpg";
+import instalacaoSilva from "../../assets/instalacao-silva.jpg";
 
 import Navbar from "../navbar";
 import Carousel from "../carrosel";
@@ -54,7 +56,13 @@ export default function HomePage() {
 
         <div className="mt-16 px-6 md:px-20">
           <Carousel
-            images={[instalacaoNatan.src, eleicaoNatan.src, instalacaoEnzo.src]}
+            images={[
+              instalacaoNatan.src,
+              eleicaoNatan.src,
+              instalacaoEnzo.src,
+              anoDemolay.src,
+              instalacaoSilva.src,
+            ]}
             speed={40}
           />
           <div className="mt-12 px-6 md:px-20 text-white bg-black/50 p-6 rounded-2xl shadow-lg">
