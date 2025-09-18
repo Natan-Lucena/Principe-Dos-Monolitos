@@ -5,7 +5,12 @@ import capituloLogo from "@/assets/logo-without-back.png";
 import gabineteLogo from "@/assets/supremo-conselho-logo.png";
 import instaIcon from "@/assets/insta.png";
 
-export default function Footer() {
+interface FooterProps {
+  logoCapSize?: number;
+  logoGabSize?: number;
+}
+
+export default function Footer({ logoCapSize, logoGabSize }: FooterProps) {
   return (
     <footer className="w-full bg-green-800 text-yellow-300 py-8 mt-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center px-6 gap-8">
@@ -14,8 +19,8 @@ export default function Footer() {
           <Image
             src={capituloLogo}
             alt="Logo Capítulo"
-            width={160}
-            height={160}
+            width={logoCapSize || 160}
+            height={logoCapSize || 160}
             className="drop-shadow-lg"
           />
         </div>
@@ -24,8 +29,8 @@ export default function Footer() {
           <Image
             src={gabineteLogo}
             alt="Logo Supremo Conselho"
-            width={140}
-            height={140}
+            width={logoGabSize || 140}
+            height={logoGabSize || 140}
             className="drop-shadow-lg"
           />
         </div>
