@@ -5,13 +5,16 @@ import Image from "next/image";
 import backgroundImage from "../../assets/background.png";
 import Navbar from "../navbar";
 import Footer from "../footer";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [id, setId] = useState("");
   const [senha, setSenha] = useState("");
+  const router = useRouter();
 
   const handleLogin = () => {
     console.log("Tentando logar com:", { id, senha });
+    router.push("/calendar");
   };
 
   const handleChangePassword = () => {
