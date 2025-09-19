@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import Sidebar from "../siderbar";
 import Image from "next/image";
 import backgroundImage from "../../assets/background.png";
+import "./style.css";
 
 interface Event {
   date: string;
