@@ -24,7 +24,7 @@ export default function HomePage() {
       <div className="relative z-10">
         <Navbar />
 
-        <div className="flex flex-col md:flex-row items-center justify-center h-[calc(100vh-80px)] px-6 md:px-20 gap-8">
+        <div className="flex flex-col md:flex-row items-center justify-center px-6 md:px-20 gap-8 h-auto md:h-[calc(100vh-80px)] pt-20 md:pt-0">
           <div className="w-full md:w-1/2 flex justify-center">
             <Image
               src={fotoMembros}
@@ -65,6 +65,7 @@ export default function HomePage() {
             ]}
             speed={40}
           />
+
           <div className="mt-12 px-6 md:px-20 text-white bg-black/50 p-6 rounded-2xl shadow-lg">
             <p className="leading-relaxed text-justify">
               Atualmente, o Capítulo DeMolay{" "}
@@ -86,6 +87,7 @@ export default function HomePage() {
             </p>
           </div>
         </div>
+
         <Footer />
       </div>
     </div>
