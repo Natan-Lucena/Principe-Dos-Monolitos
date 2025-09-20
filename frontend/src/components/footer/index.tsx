@@ -14,7 +14,6 @@ export default function Footer({ logoCapSize, logoGabSize }: FooterProps) {
   return (
     <footer className="w-full bg-green-800 text-yellow-300 py-8 mt-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center px-6 gap-8">
-        {/* Logo Capítulo (esquerda) */}
         <div className="flex justify-center md:justify-start">
           <Image
             src={capituloLogo}
@@ -39,25 +38,25 @@ export default function Footer({ logoCapSize, logoGabSize }: FooterProps) {
           <div>
             <span className="font-medium">Contato: </span>
             <a
-              href="tel:+5511999999999"
+              href="tel:+5588979997491"
               className="hover:text-yellow-400 transition"
             >
-              +55 (11) 99999-9999
+              +55 (88) 97999-7491
             </a>
           </div>
 
           <div>
             <span className="font-medium">Email: </span>
             <a
-              href="mailto:zerogamerptbr@gmail.com"
+              href="mailto:capitulo879@demolaybrasil.org.br"
               className="hover:text-yellow-400 transition"
             >
-              zerogamerptbr@gmail.com
+              capitulo879@demolaybrasil.org.br
             </a>
           </div>
 
           <Link
-            href="https://www.instagram.com/exemplo"
+            href="https://www.instagram.com/demolayquixada"
             target="_blank"
             rel="noopener noreferrer"
           >
