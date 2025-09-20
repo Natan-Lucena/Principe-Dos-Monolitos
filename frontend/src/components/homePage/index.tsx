@@ -22,7 +22,7 @@ export default function HomePage() {
       />
 
       <div className="relative z-10">
-        <Navbar />
+        <Navbar isInHomePage={true} />
 
         <div className="flex flex-col md:flex-row items-center justify-center px-6 md:px-20 gap-8 h-auto md:h-[calc(100vh-80px)] pt-20 md:pt-0">
           <div className="w-full md:w-1/2 flex justify-center">

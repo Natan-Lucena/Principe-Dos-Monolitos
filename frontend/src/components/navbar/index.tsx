@@ -4,9 +4,13 @@ import logo from "@/assets/logo-without-back.png";
 
 interface NavbarProps {
   isAlreadyLoggedIn?: boolean;
+  isInHomePage?: boolean;
 }
 
-export default function Navbar({ isAlreadyLoggedIn }: NavbarProps) {
+export default function Navbar({
+  isAlreadyLoggedIn,
+  isInHomePage,
+}: NavbarProps) {
   return (
     <nav className="w-full fixed top-0 left-0 z-50 bg-white/90 shadow-md backdrop-blur-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
@@ -18,23 +22,43 @@ export default function Navbar({ isAlreadyLoggedIn }: NavbarProps) {
         </div>
 
         <div className="hidden md:flex space-x-6 font-medium text-gray-900">
-          <Link href="/" className="hover:text-yellow-500 transition">
-            Início
+          {!isInHomePage ? (
+            <Link href="/" className="hover:text-yellow-500 transition">
+              Início
+            </Link>
+          ) : null}
+
+          <Link
+            href="https://www.demolaybrasil.org.br"
+            className="hover:text-yellow-500 transition"
+          >
+            DeMolay Brasil
           </Link>
-          <Link href="/ordem" className="hover:text-yellow-500 transition">
-            Ordem DeMolay
+
+          <Link
+            href="https://demolayceara.org.br"
+            className="hover:text-yellow-500 transition"
+          >
+            DeMolay Ceara
           </Link>
-          <Link href="/comunidade" className="hover:text-yellow-500 transition">
-            Comunidade
+
+          <Link
+            href="https://sis.demolaybrasil.org.br/login"
+            className="hover:text-yellow-500 transition"
+          >
+            Sistema Demolay
           </Link>
-          <Link href="/lideranca" className="hover:text-yellow-500 transition">
-            Liderança
-          </Link>
-          <Link href="/conteudo" className="hover:text-yellow-500 transition">
+          <Link
+            href="https://www.instagram.com/demolayquixada"
+            className="hover:text-yellow-500 transition"
+          >
             Conteúdo
           </Link>
-          <Link href="/apoie" className="hover:text-yellow-500 transition">
-            Apoie
+          <Link
+            href="https://ocaminhocomecaaqui.com.br"
+            className="hover:text-yellow-500 transition"
+          >
+            Quero ser DeMolay
           </Link>
         </div>
 
