@@ -37,13 +37,7 @@ export default function Carousel({ images, speed = 30 }: CarouselProps) {
       ref={containerRef}
       className="relative overflow-hidden w-full h-64 rounded-2xl bg-transparent"
     >
-      <motion.div
-        className="flex"
-        animate={controls}
-        drag="x"
-        dragConstraints={{ left: -100, right: 100 }}
-        dragElastic={0.1}
-      >
+      <motion.div className="flex" animate={controls}>
         {doubledImages.map((src, i) => (
           <div key={i} className="flex-shrink-0 w-80 h-64 relative">
             <Image
