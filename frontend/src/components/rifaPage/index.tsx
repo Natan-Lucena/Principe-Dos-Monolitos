@@ -66,21 +66,21 @@ export default function RifaPage() {
         <Sidebar />
 
         <main className="flex-1 flex flex-col items-center justify-start p-6 md:ml-64">
-          <h1 className="text-3xl font-bold mb-6 text-yellow-300 drop-shadow">
+          <h1 className="text-3xl font-bold mb-6 text-green-800 drop-shadow">
             🎟️ Rifa Solidária
           </h1>
 
-          <div className="grid grid-cols-10 md:grid-cols-20 gap-3 bg-green-800 p-6 rounded-2xl shadow-xl">
+          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 lg:grid-cols-20 gap-3 bg-green-800 p-6 rounded-2xl shadow-xl">
             {tickets.map((ticket) => (
               <button
                 key={ticket.number}
                 onClick={() => setSelectedTicket(ticket)}
-                className={`w-12 h-12 rounded-lg flex items-center justify-center font-bold transition 
-                  ${
-                    ticket.sold
-                      ? "bg-red-500 text-white cursor-pointer"
-                      : "bg-yellow-300 hover:bg-yellow-400 text-black"
-                  }`}
+                className={`min-w-[3rem] h-12 rounded-lg flex items-center justify-center font-bold transition 
+        ${
+          ticket.sold
+            ? "bg-red-500 text-white cursor-pointer"
+            : "bg-yellow-300 hover:bg-yellow-400 text-black"
+        }`}
               >
                 {ticket.number}
               </button>
