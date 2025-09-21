@@ -1,6 +1,6 @@
 import { User } from "../entities/user";
 
-interface UserSearchParams {
+export interface UserSearchParams {
   email?: string;
   name?: string;
 }

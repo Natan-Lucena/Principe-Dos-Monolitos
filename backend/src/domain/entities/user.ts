@@ -11,10 +11,17 @@ export class User {
     readonly id: Uuid,
     readonly name: string,
     readonly email: string,
-    readonly password: string
+    readonly password: string,
+    readonly createdAt: Date
   ) {}
 
   static create(props: UserProps): User {
-    return new User(Uuid.random(), props.name, props.email, props.password);
+    return new User(
+      Uuid.random(),
+      props.name,
+      props.email,
+      props.password,
+      new Date()
+    );
   }
 }

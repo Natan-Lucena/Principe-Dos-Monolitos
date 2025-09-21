@@ -43,4 +43,11 @@ export class Rifa {
     this.name = props.name;
     this.email = props.email;
   }
+
+  get getName(): string | undefined {
+    return this.name;
+  }
+  get getEmail(): string | undefined {
+    return this.email;
+  }
 }

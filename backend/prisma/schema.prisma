@@ -19,15 +19,14 @@ model User {
   email String @unique
   password String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   rifas Rifa[]
 }
 
 model Rifa {
   number String @id @map("_id")
-  email String
-  name String
+  email String?
+  name String?
   createdAt DateTime @default(now())
   sold Boolean @default(false)
   sellerId String?
