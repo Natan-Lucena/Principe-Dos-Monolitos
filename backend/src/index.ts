@@ -13,4 +13,4 @@ app.get("/", (req, res) => {
   res.json({ message: "Hello from Express on Vercel!" });
 });
 
-export const handler = serverless(app);
+export default serverless(app);
