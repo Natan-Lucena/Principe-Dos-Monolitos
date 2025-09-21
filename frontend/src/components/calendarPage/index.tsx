@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { ptBR } from "date-fns/locale";
 import { format } from "date-fns";
@@ -8,6 +8,7 @@ import Sidebar from "../siderbar";
 import Image from "next/image";
 import backgroundImage from "../../assets/background.png";
 import "./style.css";
+import { EventApiService } from "@/services/event-api-service";
 
 interface Event {
   date: string;
@@ -16,12 +17,16 @@ interface Event {
 
 export default function CalendarPage() {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [events, setEvents] = useState<Event[]>([]);
 
-  const events: Event[] = [
-    { date: "2025-09-20", name: "Reunião de Iniciação" },
-    { date: "2025-09-25", name: "Sessão Magna" },
-    { date: "2025-09-30", name: "Encontro Regional" },
-  ];
+  useEffect(() => {
+    const eventApiService = new EventApiService();
+    async function fetchEvents() {
+      const data = await eventApiService.listEvents();
+      setEvents(data);
+    }
+    fetchEvents();
+  }, []);
 
   const getEventForDate = (date: Date) => {
     const formatted = format(date, "yyyy-MM-dd");
