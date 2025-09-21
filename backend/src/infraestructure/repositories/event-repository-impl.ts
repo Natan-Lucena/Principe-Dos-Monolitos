@@ -18,30 +18,19 @@ export class EventRepositoryImpl implements EventRepository {
   }
 
   async save(event: Event): Promise<Event> {
-    // Limitação do monngo atlas free: não suporta upsert
-    const existing = await this.prisma.event.findUnique({
+    await this.prisma.event.upsert({
       where: { id: event.id.value },
+      create: {
+        id: event.id.value,
+        name: event.name,
+        date: event.date,
+        createdAt: event.createdAt,
+      },
+      update: {
+        name: event.name,
+        date: event.date,
+      },
     });
-
-    if (existing) {
-      await this.prisma.event.update({
-        where: { id: event.id.value },
-        data: {
-          name: event.name,
-          date: event.date,
-        },
-      });
-    } else {
-      await this.prisma.event.create({
-        data: {
-          id: event.id.value,
-          name: event.name,
-          date: event.date,
-          createdAt: event.createdAt,
-        },
-      });
-    }
-
     return event;
   }
 }
