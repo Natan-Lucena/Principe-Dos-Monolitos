@@ -4,7 +4,7 @@ import {
   formatValidationErrors,
 } from "@wave-telecom/framework/controllers";
 import { CreateEventUseCase } from "./create-event-use-case";
-import { createEventSchema } from "../schemas/create-event-schema";
+import { createEventSchema } from "../../schemas/create-event-schema";
 
 export class CreateEventController extends BaseController {
   constructor(private createEventUseCase: CreateEventUseCase) {
