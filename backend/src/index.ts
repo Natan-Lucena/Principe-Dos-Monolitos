@@ -1,9 +1,10 @@
 import express from "express";
 import cors from "cors";
 import { router } from "./application/routes";
-import serverless from "serverless-http";
 
 const app = express();
+
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -13,8 +14,8 @@ app.get("/", (req, res) => {
   res.json({ message: "Hello from Express on Vercel!" });
 });
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
 module.exports = app;
