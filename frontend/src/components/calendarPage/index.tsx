@@ -27,10 +27,9 @@ export default function CalendarPage() {
     }
     fetchEvents();
   }, []);
-
   const getEventForDate = (date: Date) => {
     const formatted = format(date, "yyyy-MM-dd");
-    return events.find((event) => event.date === formatted);
+    return events.find((event) => event.date.startsWith(formatted));
   };
 
   return (
@@ -112,8 +111,8 @@ export default function CalendarPage() {
               </h2>
               <ul className="mt-3 space-y-2">
                 {events
-                  .filter(
-                    (event) => event.date === format(selectedDate, "yyyy-MM-dd")
+                  .filter((event) =>
+                    event.date.startsWith(format(selectedDate!, "yyyy-MM-dd"))
                   )
                   .map((event, idx) => (
                     <li
@@ -123,8 +122,8 @@ export default function CalendarPage() {
                       {event.name}
                     </li>
                   ))}
-                {events.filter(
-                  (event) => event.date === format(selectedDate, "yyyy-MM-dd")
+                {events.filter((event) =>
+                  event.date.startsWith(format(selectedDate!, "yyyy-MM-dd"))
                 ).length === 0 && (
                   <p className="text-yellow-200 italic">
                     Nenhum evento neste dia.
