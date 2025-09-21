@@ -54,8 +54,8 @@ export default function CalendarPage() {
               showFixedNumberOfWeeks={true}
               prev2Label={null}
               next2Label={null}
-              prevLabel={<span>‹</span>}
-              nextLabel={<span>›</span>}
+              prevLabel={<span>⭠</span>}
+              nextLabel={<span>⭢</span>}
               navigationLabel={({ date }) => (
                 <span className="w-full text-center font-bold text-yellow-300 text-lg">
                   {format(date, "MMMM 'de' yyyy", { locale: ptBR })}
