@@ -2,8 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend of prince of monoliths",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Zer0RX",
@@ -11,9 +14,12 @@
   "dependencies": {
     "@prisma/client": "^6.16.2",
     "@wave-telecom/framework": "^2.1.8",
-    "express": "^5.1.0"
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^24.5.2",
     "nodemon": "^3.1.10",
