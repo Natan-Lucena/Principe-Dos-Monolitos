@@ -6,7 +6,7 @@ interface Event {
 export class EventApiService {
   private apiUrl: string;
   constructor() {
-    this.apiUrl = process.env.api_url || "http://localhost:3000";
+    this.apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
   }
 
   async listEvents(): Promise<Event[]> {
