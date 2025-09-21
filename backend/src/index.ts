@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { router } from "./application/routes";
+import serverless from "serverless-http";
 
 const app = express();
 
@@ -12,4 +13,4 @@ app.get("/", (req, res) => {
   res.json({ message: "Hello from Express on Vercel!" });
 });
 
-export default app;
+export const handler = serverless(app);
