@@ -2,9 +2,6 @@ import { User } from "./user";
 
 interface RifaProps {
   number: string;
-  name: string;
-  email: string;
-  createdAt: Date;
 }
 
 interface SellRifaProps {
@@ -24,13 +21,7 @@ export class Rifa {
   ) {}
 
   static create(props: RifaProps): Rifa {
-    return new Rifa(
-      props.number,
-      false,
-      props.createdAt,
-      props.name,
-      props.email
-    );
+    return new Rifa(props.number, false, new Date());
   }
 
   isSold(): boolean {
@@ -49,5 +40,8 @@ export class Rifa {
   }
   get getEmail(): string | undefined {
     return this.email;
+  }
+  get getSeller(): User | undefined {
+    return this.seller;
   }
 }

@@ -12,7 +12,6 @@ export class CreateEventUseCase {
   async execute(data: CreateEventDTO) {
     const event = Event.create({
       ...data,
-      createdAt: new Date(),
     });
     const result = await this.eventRepository.save(event);
     return result;
