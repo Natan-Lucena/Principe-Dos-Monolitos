@@ -1,44 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "../siderbar";
 import Image from "next/image";
 import backgroundImage from "../../assets/background.png";
-
-interface BuyerInfo {
-  name: string;
-  email: string;
-}
-
-interface Ticket {
-  number: number;
-  sold: boolean;
-  buyer?: BuyerInfo;
-}
+import { Rifa, RifaApiService } from "@/services/rifa-api-service";
 
 export default function RifaPage() {
-  const [tickets, setTickets] = useState<Ticket[]>(
-    Array.from({ length: 200 }, (_, i) => ({
-      number: i + 1,
-      sold: i === 2 || i === 50,
-      buyer:
-        i === 2
-          ? { name: "João Silva", email: "joao@email.com" }
-          : i === 50
-          ? { name: "Maria Souza", email: "maria@email.com" }
-          : undefined,
-    }))
-  );
+  const [rifas, setRifas] = useState<Rifa[]>([]);
 
-  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
+  useEffect(() => {
+    const rifaApiService = new RifaApiService();
+    async function fetchRifas() {
+      const data = await rifaApiService.listRifas();
+      setRifas(data);
+    }
+    fetchRifas();
+  }, []);
+
+  const [selectedTicket, setSelectedTicket] = useState<Rifa | null>(null);
   const [buyerName, setBuyerName] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
 
   const handleConfirmPurchase = () => {
     if (selectedTicket && !selectedTicket.sold) {
-      setTickets((prev) =>
+      setRifas((prev) =>
         prev.map((ticket) =>
-          ticket.number === selectedTicket.number
+          ticket.id === selectedTicket.id
             ? {
                 ...ticket,
                 sold: true,
@@ -71,9 +59,9 @@ export default function RifaPage() {
           </h1>
 
           <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-10 lg:grid-cols-20 gap-3 bg-green-800 p-6 rounded-2xl shadow-xl">
-            {tickets.map((ticket) => (
+            {rifas.map((ticket) => (
               <button
-                key={ticket.number}
+                key={ticket.id}
                 onClick={() => setSelectedTicket(ticket)}
                 className={`min-w-[3rem] h-12 rounded-lg flex items-center justify-center font-bold transition 
         ${
@@ -82,7 +70,7 @@ export default function RifaPage() {
             : "bg-yellow-300 hover:bg-yellow-400 text-black"
         }`}
               >
-                {ticket.number}
+                {ticket.id}
               </button>
             ))}
           </div>
@@ -95,15 +83,16 @@ export default function RifaPage() {
             {selectedTicket.sold ? (
               <>
                 <h2 className="text-xl font-bold mb-4 text-red-600">
-                  Número {selectedTicket.number} já vendido
+                  Número {selectedTicket.id} já vendido
                 </h2>
                 <p className="text-gray-800">
                   <span className="font-semibold">Nome:</span>{" "}
-                  {selectedTicket.buyer?.name}
+                  {/* TODO: Deixar isso dinamico */}
+                  {"NICE NAME"}
                 </p>
                 <p className="text-gray-800">
                   <span className="font-semibold">Email:</span>{" "}
-                  {selectedTicket.buyer?.email}
+                  {"<DYNAMIC EMAIL>"}
                 </p>
                 <button
                   onClick={() => setSelectedTicket(null)}
@@ -115,7 +104,7 @@ export default function RifaPage() {
             ) : (
               <>
                 <h2 className="text-xl font-bold mb-4 text-gray-900">
-                  Comprar número {selectedTicket.number}
+                  Comprar número {selectedTicket.id}
                 </h2>
                 <input
                   type="text"
