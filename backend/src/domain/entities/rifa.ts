@@ -5,7 +5,7 @@ interface RifaProps {
 }
 
 interface SellRifaProps {
-  seller: User;
+  seller?: User;
   name: string;
   email: string;
 }

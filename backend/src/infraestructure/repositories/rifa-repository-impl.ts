@@ -50,4 +50,36 @@ export class RifaRepositoryImpl implements RifaRepository {
       );
     });
   }
+
+  async find(id: string): Promise<Rifa | null> {
+    const rifa = await this.prisma.rifa.findFirst({
+      where: {
+        number: id,
+      },
+      include: { seller: true },
+    });
+
+    if (!rifa) {
+      return null;
+    }
+
+    const seller = rifa.seller;
+
+    return new Rifa(
+      rifa.number,
+      rifa.sold,
+      rifa.createdAt,
+      rifa.name ?? undefined,
+      rifa.email ?? undefined,
+      seller
+        ? new User(
+            new Uuid(seller.id),
+            seller.name,
+            seller.email,
+            seller.password,
+            seller.createdAt
+          )
+        : undefined
+    );
+  }
 }
