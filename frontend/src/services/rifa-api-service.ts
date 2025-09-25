@@ -2,6 +2,14 @@ export interface Rifa {
   id: string;
   sold: boolean;
   createdAt: Date;
+  name?: string;
+  email?: string;
+}
+
+interface SellRifaProps {
+  name: string;
+  email: string;
+  number: string;
 }
 
 export class RifaApiService {
@@ -21,5 +29,20 @@ export class RifaApiService {
       throw new Error("Failed to fetch rifas");
     }
     return response.json();
+  }
+
+  async sellRifa(props: SellRifaProps): Promise<void> {
+    const response = await fetch(`${this.apiUrl}/rifas/sell`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(props),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Failed to sell rifa: ${errorMessage}`);
+    }
   }
 }

@@ -22,22 +22,31 @@ export default function RifaPage() {
   const [buyerName, setBuyerName] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
 
-  const handleConfirmPurchase = () => {
+  const handleConfirmPurchase = async () => {
     if (selectedTicket && !selectedTicket.sold) {
-      setRifas((prev) =>
-        prev.map((ticket) =>
-          ticket.id === selectedTicket.id
-            ? {
-                ...ticket,
-                sold: true,
-                buyer: { name: buyerName, email: buyerEmail },
-              }
-            : ticket
-        )
-      );
-      setSelectedTicket(null);
-      setBuyerName("");
-      setBuyerEmail("");
+      try {
+        const rifaApiService = new RifaApiService();
+
+        await rifaApiService.sellRifa({
+          name: buyerName,
+          email: buyerEmail,
+          number: selectedTicket.id,
+        });
+
+        // Atualiza localmente para refletir na tela
+        setRifas((prev) =>
+          prev.map((ticket) =>
+            ticket.id === selectedTicket.id ? { ...ticket, sold: true } : ticket
+          )
+        );
+
+        setSelectedTicket(null);
+        setBuyerName("");
+        setBuyerEmail("");
+      } catch (error) {
+        console.error("Erro ao vender rifa:", error);
+        alert("Não foi possível realizar a compra. Tente novamente.");
+      }
     }
   };
 
@@ -87,12 +96,11 @@ export default function RifaPage() {
                 </h2>
                 <p className="text-gray-800">
                   <span className="font-semibold">Nome:</span>{" "}
-                  {/* TODO: Deixar isso dinamico */}
-                  {"NICE NAME"}
+                  {selectedTicket.name}
                 </p>
                 <p className="text-gray-800">
                   <span className="font-semibold">Email:</span>{" "}
-                  {"<DYNAMIC EMAIL>"}
+                  {selectedTicket.email}
                 </p>
                 <button
                   onClick={() => setSelectedTicket(null)}
