@@ -40,7 +40,7 @@ export class RifaRepositoryImpl implements RifaRepository {
         rifa.email ?? undefined,
         seller
           ? new User(
-              new Uuid(seller.id),
+              seller.id,
               seller.name,
               seller.email,
               seller.password,
@@ -73,7 +73,7 @@ export class RifaRepositoryImpl implements RifaRepository {
       rifa.email ?? undefined,
       seller
         ? new User(
-            new Uuid(seller.id),
+            seller.id,
             seller.name,
             seller.email,
             seller.password,

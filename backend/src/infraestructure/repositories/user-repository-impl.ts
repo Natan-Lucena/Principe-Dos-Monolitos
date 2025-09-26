@@ -17,7 +17,7 @@ export class UserRepositoryImpl implements UserRepository {
     });
     return result.map((user: any) => {
       return new User(
-        new Uuid(user.id),
+        user.id,
         user.name,
         user.email,
         user.password,
@@ -28,9 +28,9 @@ export class UserRepositoryImpl implements UserRepository {
 
   async save(user: User): Promise<User> {
     await this.prisma.user.upsert({
-      where: { id: user.id.value },
+      where: { id: user.id },
       create: {
-        id: user.id.value,
+        id: user.id,
         name: user.name,
         email: user.email,
         password: user.password,

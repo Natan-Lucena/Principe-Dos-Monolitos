@@ -1,6 +1,5 @@
-import { Uuid } from "@wave-telecom/framework/core";
-
 interface UserProps {
+  id: string;
   name: string;
   email: string;
   password: string;
@@ -8,7 +7,7 @@ interface UserProps {
 
 export class User {
   constructor(
-    readonly id: Uuid,
+    readonly id: string,
     readonly name: string,
     readonly email: string,
     readonly password: string,
@@ -17,7 +16,7 @@ export class User {
 
   static create(props: UserProps): User {
     return new User(
-      Uuid.random(),
+      props.id,
       props.name,
       props.email,
       props.password,
