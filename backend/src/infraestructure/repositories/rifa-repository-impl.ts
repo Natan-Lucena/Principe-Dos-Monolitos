@@ -2,7 +2,6 @@ import { PrismaClient } from "@prisma/client";
 import { RifaRepository } from "../../domain/repositories/rifa-repository";
 import { Rifa } from "../../domain/entities/rifa";
 import { User } from "../../domain/entities/user";
-import { Uuid } from "@wave-telecom/framework/core";
 
 export class RifaRepositoryImpl implements RifaRepository {
   constructor(private prisma: PrismaClient) {}

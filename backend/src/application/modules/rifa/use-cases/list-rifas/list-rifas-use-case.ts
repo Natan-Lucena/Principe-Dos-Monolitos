@@ -5,6 +5,11 @@ export class ListRifasUseCase {
 
   async execute() {
     const rifas = await this.rifaRepository.list();
-    return rifas;
+
+    const sortedRifas = rifas.sort((a, b) => {
+      return parseInt(a.id) - parseInt(b.id);
+    });
+
+    return sortedRifas;
   }
 }
