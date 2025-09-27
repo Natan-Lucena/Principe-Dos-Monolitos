@@ -6,15 +6,17 @@ import backgroundImage from "../../assets/background.png";
 import Navbar from "../navbar";
 import Footer from "../footer";
 import { useRouter } from "next/navigation";
+import { AuthApiService } from "@/services/auth-api-service";
 
 export default function ChangePasswordPage() {
   const [id, setId] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmSenha, setConfirmSenha] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (!id || !email || !senha || !confirmSenha) {
       alert("Por favor, preencha todos os campos.");
       return;
@@ -24,10 +26,18 @@ export default function ChangePasswordPage() {
       return;
     }
 
-    alert(
-      `Uma confirmação foi enviada para o email: ${email}. Após confirmada, sua senha será alterada.`
-    );
-    router.push("/login");
+    try {
+      setLoading(true);
+      const authService = new AuthApiService();
+      await authService.updatePassword({ id, email, password: senha });
+
+      router.push("/login");
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao atualizar a senha. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -98,9 +108,10 @@ export default function ChangePasswordPage() {
             <div className="flex flex-col gap-4">
               <button
                 onClick={handleConfirm}
-                className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition"
+                disabled={loading}
+                className="w-full bg-yellow-500 hover:bg-yellow-600 disabled:bg-yellow-300 text-white font-bold py-3 rounded-lg transition"
               >
-                Confirmar
+                {loading ? "Processando..." : "Confirmar"}
               </button>
               <button
                 onClick={() => router.push("/login")}

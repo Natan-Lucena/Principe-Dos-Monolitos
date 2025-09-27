@@ -6,6 +6,11 @@ interface LoginRequest {
 interface LoginResponse {
   token: string;
 }
+interface UpdatePasswordRequest {
+  id: string;
+  email: string;
+  password: string;
+}
 
 export class AuthApiService {
   private apiUrl: string;
@@ -29,5 +34,21 @@ export class AuthApiService {
     const { token } = (await response.json()) as LoginResponse;
 
     return token;
+  }
+
+  async updatePassword(request: UpdatePasswordRequest) {
+    const response = await fetch(`${this.apiUrl}/auth/update-password`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(request),
+    });
+
+    if (!response.ok) {
+      throw new Error("Falha no login");
+    }
+
+    return;
   }
 }
