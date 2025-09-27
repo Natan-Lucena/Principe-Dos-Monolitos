@@ -10,7 +10,7 @@ export class User {
     readonly id: string,
     readonly name: string,
     readonly email: string,
-    readonly password: string,
+    private _password: string,
     readonly createdAt: Date
   ) {}
 
@@ -22,5 +22,13 @@ export class User {
       props.password,
       new Date()
     );
+  }
+
+  updatePassword(password: string) {
+    this._password = password;
+  }
+
+  get password() {
+    return this._password;
   }
 }
