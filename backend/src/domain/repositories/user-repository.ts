@@ -1,6 +1,7 @@
 import { User } from "../entities/user";
 
 export interface UserSearchParams {
+  id?: string;
   email?: string;
   name?: string;
 }

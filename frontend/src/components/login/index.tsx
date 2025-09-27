@@ -13,7 +13,6 @@ export default function LoginPage() {
   const router = useRouter();
 
   const handleLogin = () => {
-    console.log("Tentando logar com:", { id, senha });
     router.push("/calendar");
   };
 

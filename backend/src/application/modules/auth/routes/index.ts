@@ -4,6 +4,8 @@ import { UserRepositoryImpl } from "../../../../infraestructure/repositories/use
 import { JwtService } from "../services/jwt-service";
 import { SignUpUserUseCase } from "../use-cases/sign-up-user/sign-up-user-use-case";
 import { SignUpUserController } from "../use-cases/sign-up-user/sign-up-user-controller";
+import { SignInUserUseCase } from "../use-cases/sign-in-user/sign-in-user-use-case";
+import { SignInUserController } from "../use-cases/sign-in-user/sign-in-user-controller";
 
 const authRouter = Router();
 
@@ -12,9 +14,14 @@ const userRepository = new UserRepositoryImpl(prismaClient);
 const jwtService = new JwtService(userRepository);
 
 const signUpUserUseCase = new SignUpUserUseCase(userRepository, jwtService);
+const signInUserUseCase = new SignInUserUseCase(userRepository, jwtService);
 
 authRouter.post("/sign-up", (req: Request, res: Response) =>
   new SignUpUserController(signUpUserUseCase).execute(req, res)
+);
+
+authRouter.post("/sign-in", (req: Request, res: Response) =>
+  new SignInUserController(signInUserUseCase).execute(req, res)
 );
 
 export { authRouter };

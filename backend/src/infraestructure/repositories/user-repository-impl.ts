@@ -4,13 +4,13 @@ import {
   UserRepository,
   UserSearchParams,
 } from "../../domain/repositories/user-repository";
-import { Uuid } from "@wave-telecom/framework/core";
 
 export class UserRepositoryImpl implements UserRepository {
   constructor(private prisma: PrismaClient) {}
   async search(params: UserSearchParams): Promise<User[]> {
     const result = await this.prisma.user.findMany({
       where: {
+        ...(params.id ? { id: params.id } : {}),
         ...(params.email ? { email: params.email } : {}),
         ...(params.name ? { name: params.name } : {}),
       },
