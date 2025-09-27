@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 export interface Rifa {
   id: string;
   sold: boolean;
@@ -23,6 +25,7 @@ export class RifaApiService {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: this.getToken(),
       },
     });
     if (!response.ok) {
@@ -36,6 +39,7 @@ export class RifaApiService {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: this.getToken(),
       },
       body: JSON.stringify(props),
     });
@@ -44,5 +48,10 @@ export class RifaApiService {
       const errorMessage = await response.text();
       throw new Error(`Failed to sell rifa: ${errorMessage}`);
     }
+  }
+
+  private getToken() {
+    const token = Cookies.get("auth_token");
+    return token ? `Bearer ${token}` : "";
   }
 }

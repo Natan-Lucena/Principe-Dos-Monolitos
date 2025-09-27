@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 interface Event {
   name: string;
   date: string;
@@ -10,10 +12,12 @@ export class EventApiService {
   }
 
   async listEvents(): Promise<Event[]> {
+    const token = Cookies.get("auth_token");
     const response = await fetch(`${this.apiUrl}/events`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: token ? `Bearer ${token}` : "",
       },
     });
     return response.json();

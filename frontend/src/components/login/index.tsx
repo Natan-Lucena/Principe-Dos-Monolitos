@@ -6,14 +6,26 @@ import backgroundImage from "../../assets/background.png";
 import Navbar from "../navbar";
 import Footer from "../footer";
 import { useRouter } from "next/navigation";
+import { AuthApiService } from "@/services/auth-api-service";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
   const [id, setId] = useState("");
   const [senha, setSenha] = useState("");
   const router = useRouter();
 
-  const handleLogin = () => {
-    router.push("/calendar");
+  const handleLogin = async () => {
+    try {
+      const authApi = new AuthApiService();
+      const token = await authApi.login({ id, password: senha });
+
+      Cookies.set("auth_token", token, { expires: 1 });
+
+      router.push("/calendar");
+    } catch (error) {
+      alert("Login falhou. Verifique suas credenciais.");
+      console.error(error);
+    }
   };
 
   const handleChangePassword = () => {

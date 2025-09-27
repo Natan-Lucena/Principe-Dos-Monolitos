@@ -9,6 +9,7 @@ import Image from "next/image";
 import backgroundImage from "../../assets/background.png";
 import "./style.css";
 import { EventApiService } from "@/services/event-api-service";
+import { useAuth } from "@/hooks/use-auth-hook";
 
 interface Event {
   date: string;
@@ -16,22 +17,33 @@ interface Event {
 }
 
 export default function CalendarPage() {
+  const { isAuthenticated } = useAuth("/login");
+
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
+    if (!isAuthenticated) return;
     const eventApiService = new EventApiService();
     async function fetchEvents() {
       const data = await eventApiService.listEvents();
       setEvents(data);
     }
     fetchEvents();
-  }, []);
+  }, [isAuthenticated]);
+
+  if (isAuthenticated === null) {
+    return <p className="text-white">Carregando...</p>;
+  }
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
   const getEventForDate = (date: Date) => {
     const formatted = format(date, "yyyy-MM-dd");
     return events.find((event) => event.date.startsWith(formatted));
   };
-
   return (
     <div className="relative w-screen min-h-screen">
       <Image

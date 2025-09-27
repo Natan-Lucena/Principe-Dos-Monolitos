@@ -5,22 +5,33 @@ import Sidebar from "../siderbar";
 import Image from "next/image";
 import backgroundImage from "../../assets/background.png";
 import { Rifa, RifaApiService } from "@/services/rifa-api-service";
+import { useAuth } from "@/hooks/use-auth-hook";
 
 export default function RifaPage() {
+  const { isAuthenticated } = useAuth("/login");
+
   const [rifas, setRifas] = useState<Rifa[]>([]);
+  const [selectedTicket, setSelectedTicket] = useState<Rifa | null>(null);
+  const [buyerName, setBuyerName] = useState("");
+  const [buyerEmail, setBuyerEmail] = useState("");
 
   useEffect(() => {
+    if (!isAuthenticated) return;
     const rifaApiService = new RifaApiService();
     async function fetchRifas() {
       const data = await rifaApiService.listRifas();
       setRifas(data);
     }
     fetchRifas();
-  }, []);
+  }, [isAuthenticated]);
 
-  const [selectedTicket, setSelectedTicket] = useState<Rifa | null>(null);
-  const [buyerName, setBuyerName] = useState("");
-  const [buyerEmail, setBuyerEmail] = useState("");
+  if (isAuthenticated === null) {
+    return <p className="text-white">Carregando...</p>;
+  }
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const handleConfirmPurchase = async () => {
     if (selectedTicket && !selectedTicket.sold) {
