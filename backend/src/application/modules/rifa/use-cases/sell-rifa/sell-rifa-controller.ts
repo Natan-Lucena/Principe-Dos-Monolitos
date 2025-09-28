@@ -18,8 +18,8 @@ export class SellRifaController extends BaseController {
       return this.clientError(res, undefined, errors);
     }
     const payload = validation.data;
-
-    const result = await this.useCase.execute(payload);
+    const user = req.user;
+    const result = await this.useCase.execute({ seller: user, ...payload });
     if (!result.ok) {
       switch (result.error) {
         case "RIFA_NOT_FOUND":
